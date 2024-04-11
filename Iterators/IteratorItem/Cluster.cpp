@@ -26,7 +26,12 @@ FileTypeEnum Cluster::GetFileType()
 
 Cluster::Cluster(BYTE* data, unsigned int num, unsigned int ClusterSize)
 {
-    content = data;
-    //std::memcpy(content, data, sizeof(BYTE) * ClusterSize);
+    content = new BYTE[ClusterSize];
+    std::memcpy(content, data, sizeof(BYTE) * ClusterSize);
     clusterNum = num;
+}
+void Cluster::SetContent(BYTE* data,unsigned int ClusterSize)
+{
+    content = new BYTE[ClusterSize];
+    std::memcpy(content, data, sizeof(BYTE) * ClusterSize);
 }

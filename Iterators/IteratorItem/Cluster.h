@@ -11,8 +11,7 @@ private:
 
 public:
 	void SetClusterNum(unsigned int num) {clusterNum = num;}
-	void SetContent(BYTE* arr) { content = arr; }
-	//void SetContent(BYTE* data, unsigned int ClusterSize);
+	void SetContent(BYTE* arr, unsigned int ClusterSize);
 	BYTE* GetContent() { return content; };
 	unsigned int GetNum() const { return clusterNum; };
 	FileTypeEnum GetFileType();

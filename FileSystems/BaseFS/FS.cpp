@@ -23,7 +23,7 @@ bool FS::Init(LPCWSTR fileName) {
     }
     return true;
 }
-void FS::ReadCluster(Cluster* item, unsigned int clusterNum)
+bool FS::ReadCluster(Cluster* item, unsigned int clusterNum)
 {
     DWORD bytesRead;
     DWORD bytesToRead = clusterSize;
@@ -34,17 +34,18 @@ void FS::ReadCluster(Cluster* item, unsigned int clusterNum)
     if (!SetFilePointerEx(fileHandler, sectorSizeOffset, NULL, FILE_BEGIN)) {
         throw std::invalid_argument("Set FilePointer error");
         CloseHandle(fileHandler);
-//        return false;
+        return false;
     }
     if (!ReadFile(fileHandler, arr, clusterSize, &bytesRead, NULL))
     {
         throw std::invalid_argument("ReadFile error");
         CloseHandle(fileHandler);
-//        return false;
+        return false;
     }
     item->SetClusterNum(clusterNum);
-    item->SetContent(arr);//, clusterSize);
-    //delete[] arr;
+    item->SetContent(arr, clusterSize);
+    delete[] arr;
+    return true;
 }
 bool FS::ReadClusterSize()
 {
