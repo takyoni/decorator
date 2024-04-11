@@ -21,7 +21,7 @@ FileTypeEnum Cluster::GetFileType()
     else if (content[0] == 0xFF && content[1] == 0xD8 && content[2] == 0xFF && content[3] == 0xE0) {
         return  FileTypeEnum::Jpeg;
     }
-    return FileTypeEnum::Pdf;
+    return FileTypeEnum::Underfind;
 }
 
 Cluster::Cluster(BYTE* data, unsigned int num, unsigned int ClusterSize)
